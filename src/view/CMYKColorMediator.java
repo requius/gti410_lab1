@@ -65,39 +65,39 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 		blackImage = new BufferedImage(imagesWidth, imagesHeight,
 				BufferedImage.TYPE_INT_ARGB);
 
-		computeCyanImage(cyan, magenta, yellow, black);
-		computeMagentaImage(cyan, magenta, yellow, black);
-		computeYellowImage(cyan, magenta, yellow, black);
-		computeBlackImage(cyan, magenta, yellow, black);
+		computeCyanImage(this.cyan, this.magenta, this.yellow, this.black);
+		computeMagentaImage(this.cyan, this.magenta, this.yellow, this.black);
+		computeYellowImage(this.cyan, this.magenta, this.yellow, this.black);
+		computeBlackImage(this.cyan, this.magenta, this.yellow, this.black);
 	}
 
 	/*
 	 * @see View.SliderObserver#update(double)
 	 */
-	public void update(ColorSlider s, int v) {
+	public void update(ColorSlider cs, int v) {
 		boolean updateCyan = false;
 		boolean updateMagenta = false;
 		boolean updateYellow = false;
 		boolean updateBlack = false;
-		if (s == cyanCS && v != cyan) {
+		if (cs == cyanCS && v != cyan) {
 			cyan = v;
 			updateMagenta = true;
 			updateYellow = true;
 			updateBlack = true;
 		}
-		if (s == magentaCS && v != magenta) {
+		if (cs == magentaCS && v != magenta) {
 			magenta = v;
 			updateCyan = true;
 			updateYellow = true;
 			updateBlack = true;
 		}
-		if (s == yellowCS && v != yellow) {
+		if (cs == yellowCS && v != yellow) {
 			yellow = v;
 			updateCyan = true;
 			updateMagenta = true;
 			updateBlack = true;
 		}
-		if (s == blackCS && v != black) {
+		if (cs == blackCS && v != black) {
 			black = v;
 			updateCyan = true;
 			updateMagenta = true;
