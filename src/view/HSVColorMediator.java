@@ -315,8 +315,6 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 		green = rgbColors[1];
 		blue = rgbColors[2];
 
-		// When updated with the new "result" color, if the "currentColor"
-		// is aready properly set, there is no need to recompute the images.
 		Pixel currentColor = new Pixel(red, green, blue, 255);
 		if (currentColor.getARGB() == result.getPixel().getARGB())
 			return;
@@ -324,6 +322,7 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 		red = result.getPixel().getRed();
 		green = result.getPixel().getGreen();
 		blue = result.getPixel().getBlue();
+		
 		double[] hsvColors = convertRGBtoHSV(red, green, blue);
 
 		hue = hsvColors[0];
