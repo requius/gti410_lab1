@@ -40,6 +40,7 @@ import model.Pixel;
 public class ColorDialog extends JDialog {
 	private JButton okButton;
 	private RGBColorMediator rgbMediator;
+	private CMYKColorMediator cmykMediator;
 	private ActionListener okActionListener;
 	private ColorDialogResult result;
 	
@@ -117,13 +118,46 @@ public class ColorDialog extends JDialog {
 	}
 	
 	private JPanel createCMYKPanel(ColorDialogResult result, int imageWidths) {	
+		cmykMediator = new CMYKColorMediator(result, imageWidths, 30);
+		
 		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		ColorSlider csCyan = new ColorSlider("C:", cmykMediator.getCyan(), cmykMediator.getCyanImage());
+		ColorSlider csMagenta = new ColorSlider("M:",  cmykMediator.getMagenta(), cmykMediator.getMagentaImage());
+		ColorSlider csYellow = new ColorSlider("Y:",  cmykMediator.getYellow(), cmykMediator.getYellowImage());
+		ColorSlider csBlack = new ColorSlider("K:",  cmykMediator.getBlack(), cmykMediator.getBlackImage());
+		
+		cmykMediator.setCyanCS(csCyan);
+		cmykMediator.setMagentaCS(csMagenta);
+		cmykMediator.setYellowCS(csYellow);
+		cmykMediator.setBlackCS(csBlack);
+		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(csCyan);
+		panel.add(csMagenta);
+		panel.add(csYellow);
+		panel.add(csBlack);
 		
 		return panel;
 	}
 	
 	private JPanel createHSVPanel(ColorDialogResult result, int imageWidths) {	
+		rgbMediator = new RGBColorMediator(result, imageWidths, 30);
+		
 		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		ColorSlider csRed = new ColorSlider("R:", result.getPixel().getRed(), rgbMediator.getRedImage());
+		ColorSlider csGreen = new ColorSlider("G:", result.getPixel().getGreen(), rgbMediator.getGreenImage());
+		ColorSlider csBlue = new ColorSlider("B:", result.getPixel().getBlue(), rgbMediator.getBlueImage());
+		
+		rgbMediator.setRedCS(csRed);
+		rgbMediator.setGreenCS(csGreen);
+		rgbMediator.setBlueCS(csBlue);
+		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(csRed);
+		panel.add(csGreen);
+		panel.add(csBlue);
 		
 		return panel;
 	}
