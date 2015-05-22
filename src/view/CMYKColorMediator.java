@@ -285,22 +285,29 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 	public int getBlack() {
 		return (int) Math.round(this.black);
 	}
-
+	
+//Cette fonction est inspiré à partir du site web ci-dessous,
+//la partie RGB to CMYK conversion formula
+//http://www.rapidtables.com/convert/color/rgb-to-cmyk.htm	
 	public int[] convertRGBtoCMYK(int red, int green, int blue) {
 		int[] cmykColors = new int[4];
 
-		float cyan = 1 - ((float) red / 255);
-		float magenta = 1 - ((float) green / 255);
-		float yellow = 1 - ((float) blue / 255);
-		float black = Math.min(Math.min(cyan, magenta), yellow);
+		float cyan = (float) red / 255;
+		float magenta = (float) green / 255;
+		float yellow = (float) blue / 255;
+		float black = 1 - Math.max(cyan, Math.max(magenta, yellow));
 
-		cmykColors[0] = (int) Math.round((255 * (cyan - black) / (1 - black)));
-		cmykColors[1] = (int) Math.round((255 * (magenta - black) / (1 - black)));
-		cmykColors[2] = (int) Math.round((255 * (yellow - black) / (1 - black)));
+		cmykColors[0] = (int) Math.round((255 * (1 - cyan - black) / (1 - black)));
+		cmykColors[1] = (int) Math.round((255 * (1 - magenta - black) / (1 - black)));
+		cmykColors[2] = (int) Math.round((255 * (1 - yellow - black) / (1 - black)));
 		cmykColors[3] = (int) Math.round((255 * black));
+		
 		return cmykColors;
 	}
-
+	
+//Cette fonction est inspiré à partir du site web ci-dessous,
+//la partie CMYK to RGB conversion formula
+//http://www.rapidtables.com/convert/color/cmyk-to-rgb.htm
 	public int[] convertCMYKtoRGB(int cyan, int magenta, int yellow, int black) {
 		int[] rgbColors = new int[3];
 

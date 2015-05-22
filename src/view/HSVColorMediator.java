@@ -45,8 +45,6 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 		this.green = result.getPixel().getGreen();
 		this.blue = result.getPixel().getBlue();
 
-		
-
 		this.result = result;
 		result.addObserver(this);
 
@@ -56,13 +54,13 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 				BufferedImage.TYPE_INT_ARGB);
 		valueImage = new BufferedImage(imagesWidth, imagesHeight,
 				BufferedImage.TYPE_INT_ARGB);
-		
+
 		double[] hsvColors = convertRGBtoHSV(red, green, blue);
-		
+
 		this.hue = hsvColors[0];
 		this.saturation = hsvColors[1];
 		this.value = hsvColors[2];
-		
+
 		computeHueImage(this.hue, this.saturation, this.value);
 		computeSaturationImage(this.hue, this.saturation, this.value);
 		computeValueImage(this.hue, this.saturation, this.value);
@@ -202,14 +200,14 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 	public int getHue() {
 		return (int) ((this.hue / 360) * 255);
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getSaturation() {
 		return (int) (this.saturation * 255);
 	}
-	
+
 	/**
 	 * @return
 	 */
@@ -234,18 +232,19 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 
 		double hue = 0;
 
-		if (r == max && g == min)
+		if (r == max && g == min) {
 			hue = 5 + (r - b) / (r - g);
-		else if (r == max && b == min)
+		} else if (r == max && b == min) {
 			hue = 1 - (r - g) / (r - b);
-		else if (g == max && b == min)
+		} else if (g == max && b == min) {
 			hue = 1 + (g - r) / (g - b);
-		else if (g == max && r == min)
+		} else if (g == max && r == min) {
 			hue = 3 - (g - b) / (g - r);
-		else if (b == max && r == min)
+		} else if (b == max && r == min) {
 			hue = 3 + (b - g) / (b - r);
-		else if (b == max && g == min)
+		} else if (b == max && g == min) {
 			hue = 5 - (b - r) / (b - g);
+		}
 		hue = hue * 60;
 
 		if (hue < 0)
@@ -267,7 +266,6 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 			r = chroma;
 			g = x;
 			b = 0;
-
 		} else if (1 <= hPrime && hPrime <= 2) {
 			r = x;
 			g = chroma;
@@ -322,7 +320,7 @@ class HSVColorMediator extends Object implements SliderObserver, ObserverIF {
 		red = result.getPixel().getRed();
 		green = result.getPixel().getGreen();
 		blue = result.getPixel().getBlue();
-		
+
 		double[] hsvColors = convertRGBtoHSV(red, green, blue);
 
 		hue = hsvColors[0];
