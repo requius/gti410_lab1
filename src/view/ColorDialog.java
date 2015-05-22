@@ -33,13 +33,14 @@ import model.Pixel;
  * <p>Title: ColorDialog</p>
  * <p>Description: ... (JDialog)</p>
  * <p>Copyright: Copyright (c) 2003 Mohammed Elghaouat, Eric Paquette</p>
- * <p>Company: (ÉTS) - École de Technologie Supérieure</p>
+ * <p>Company: (ï¿½TS) - ï¿½cole de Technologie Supï¿½rieure</p>
  * @author unascribed
  * @version $Revision: 1.7 $
  */
 public class ColorDialog extends JDialog {
 	private JButton okButton;
 	private RGBColorMediator rgbMediator;
+	private HSVColorMediator hsvMediator;
 	private ActionListener okActionListener;
 	private ColorDialogResult result;
 	
@@ -117,15 +118,57 @@ public class ColorDialog extends JDialog {
 	}
 	
 	private JPanel createCMYKPanel(ColorDialogResult result, int imageWidths) {	
+rgbMediator = new RGBColorMediator(result, imageWidths, 30);
+		
 		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		ColorSlider csRed = new ColorSlider("R:", result.getPixel().getRed(), rgbMediator.getRedImage());
+		ColorSlider csGreen = new ColorSlider("G:", result.getPixel().getGreen(), rgbMediator.getGreenImage());
+		ColorSlider csBlue = new ColorSlider("B:", result.getPixel().getBlue(), rgbMediator.getBlueImage());
+		
+		rgbMediator.setRedCS(csRed);
+		rgbMediator.setGreenCS(csGreen);
+		rgbMediator.setBlueCS(csBlue);
+		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(csRed);
+		panel.add(csGreen);
+		panel.add(csBlue);
 		
 		return panel;
 	}
 	
 	private JPanel createHSVPanel(ColorDialogResult result, int imageWidths) {	
-		JPanel panel = new JPanel();
 		
-		return panel;
+		 //creating an empty
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        
+        //calling HSVColorMediator class
+        hsvMediator = new HSVColorMediator(result, imageWidths, 30);
+        
+
+        //creating each color slider properly
+        ColorSlider csHue = new ColorSlider("H:", hsvMediator.getHueColor(), hsvMediator.getHueImage());
+        ColorSlider csSaturation = new ColorSlider("S:", hsvMediator.getSaturationColor(), hsvMediator.getSaturationImage());
+        ColorSlider csValue = new ColorSlider("V:", hsvMediator.getValueColor(), hsvMediator.getValueImage());
+        
+        
+        //setting the proper slider with the correct color
+        hsvMediator.setHueCS(csHue);
+        hsvMediator.setSaturationCS(csSaturation);
+        hsvMediator.setValueCS(csValue);
+        
+        //adding the sliders to the panel
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(csHue);
+        panel.add(csSaturation);
+        panel.add(csValue);
+        
+        //returning the panel to be painted
+        return panel;
+
 	}
 }
 
