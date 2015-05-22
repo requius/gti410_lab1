@@ -289,34 +289,24 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 	public int[] convertRGBtoCMYK(int red, int green, int blue) {
 		int[] cmykColors = new int[4];
 
-		float redTemp = red / 255;
-		float greenTemp = green / 255;
-		float blueTemp = blue / 255;
+		float cyan = 1 - ((float) red / 255);
+		float magenta = 1 - ((float) green / 255);
+		float yellow = 1 - ((float) blue / 255);
+		float black = Math.min(Math.min(cyan, magenta), yellow);
 
-		int black = Math.round((1 - Math.max(redTemp,
-				Math.max(greenTemp, blueTemp))) * 255);
-		int cyan = Math.round(((1 - redTemp - black) / (1 - black)) * 255);
-		int magenta = Math.round(((1 - greenTemp - black) / (1 - black)) * 255);
-		int yellow = Math.round(((1 - blueTemp - black) / (1 - black)) * 255);
-
-		cmykColors[0] = cyan;
-		cmykColors[1] = magenta;
-		cmykColors[2] = yellow;
-		cmykColors[3] = black;
-
+		cmykColors[0] = (int) Math.round((255 * (cyan - black) / (1 - black)));
+		cmykColors[1] = (int) Math.round((255 * (magenta - black) / (1 - black)));
+		cmykColors[2] = (int) Math.round((255 * (yellow - black) / (1 - black)));
+		cmykColors[3] = (int) Math.round((255 * black));
 		return cmykColors;
 	}
 
 	public int[] convertCMYKtoRGB(int cyan, int magenta, int yellow, int black) {
 		int[] rgbColors = new int[3];
 
-		int red = Math.round((255 - cyan) * (255 - black) / 255);
-		int green = Math.round((255 - magenta) * (255 - black) / 255);
-		int blue = Math.round((255 - yellow) * (255 - black) / 255);
-
-		rgbColors[0] = red;
-		rgbColors[1] = green;
-		rgbColors[2] = blue;
+        rgbColors[0] = Math.round((255 - cyan) * (255 - black) / 255);
+        rgbColors[1] = Math.round((255 - magenta) * (255 - black) / 255);
+        rgbColors[2] = Math.round((255 - yellow) * (255 - black) / 255);
 
 		return rgbColors;
 	}
