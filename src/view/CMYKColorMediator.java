@@ -286,7 +286,7 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 		return (int) Math.round(this.black);
 	}
 	
-//Cette fonction est inspiré à partir du site web ci-dessous,
+//Cette fonction est inspirÃ© Ã  partir du site web ci-dessous,
 //la partie RGB to CMYK conversion formula
 //http://www.rapidtables.com/convert/color/rgb-to-cmyk.htm	
 	public int[] convertRGBtoCMYK(int red, int green, int blue) {
@@ -305,15 +305,15 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 		return cmykColors;
 	}
 	
-//Cette fonction est inspiré à partir du site web ci-dessous,
+//Cette fonction est inspirÃ© Ã  partir du site web ci-dessous,
 //la partie CMYK to RGB conversion formula
 //http://www.rapidtables.com/convert/color/cmyk-to-rgb.htm
 	public int[] convertCMYKtoRGB(int cyan, int magenta, int yellow, int black) {
 		int[] rgbColors = new int[3];
 
-        rgbColors[0] = Math.round((255 - cyan) * (255 - black) / 255);
-        rgbColors[1] = Math.round((255 - magenta) * (255 - black) / 255);
-        rgbColors[2] = Math.round((255 - yellow) * (255 - black) / 255);
+		rgbColors[0] = Math.round((255 - cyan) * (255 - black) / 255);
+		rgbColors[1] = Math.round((255 - magenta) * (255 - black) / 255);
+		rgbColors[2] = Math.round((255 - yellow) * (255 - black) / 255);
 
 		return rgbColors;
 	}
