@@ -34,6 +34,12 @@ class RGBColorMediator extends Object implements SliderObserver, ObserverIF {
 	int imagesHeight;
 	ColorDialogResult result;
 	
+	/**
+	 * Constructeur 
+	 * @param result
+	 * @param imagesWidth
+	 * @param imagesHeight
+	 */
 	RGBColorMediator(ColorDialogResult result, int imagesWidth, int imagesHeight) {
 		this.imagesWidth = imagesWidth;
 		this.imagesHeight = imagesHeight;
@@ -87,7 +93,13 @@ class RGBColorMediator extends Object implements SliderObserver, ObserverIF {
 		Pixel pixel = new Pixel(red, green, blue, 255);
 		result.setPixel(pixel);
 	}
-	
+
+	/**
+	 * Calcule les valeurs de l'image de la couleur Rouge
+	 * @param red
+	 * @param green
+	 * @param blue
+	 */
 	public void computeRedImage(int red, int green, int blue) { 
 		Pixel p = new Pixel(red, green, blue, 255); 
 		for (int i = 0; i<imagesWidth; ++i) {
@@ -102,6 +114,12 @@ class RGBColorMediator extends Object implements SliderObserver, ObserverIF {
 		}
 	}
 	
+	/**
+	 * Calcule les valeurs de l'image de la couleur Green
+	 * @param red
+	 * @param green
+	 * @param blue
+	 */
 	public void computeGreenImage(int red, int green, int blue) {
 		Pixel p = new Pixel(red, green, blue, 255); 
 		for (int i = 0; i<imagesWidth; ++i) {
@@ -116,6 +134,12 @@ class RGBColorMediator extends Object implements SliderObserver, ObserverIF {
 		}
 	}
 	
+	/**
+	 * Calcule les valeurs de l'image de la couleur Blue
+	 * @param red
+	 * @param green
+	 * @param blue
+	 */
 	public void computeBlueImage(int red, int green, int blue) { 
 		Pixel p = new Pixel(red, green, blue, 255); 
 		for (int i = 0; i<imagesWidth; ++i) {
@@ -174,6 +198,7 @@ class RGBColorMediator extends Object implements SliderObserver, ObserverIF {
 		blueCS = slider;
 		slider.addObserver(this);
 	}
+	
 	/**
 	 * @return
 	 */
@@ -194,7 +219,6 @@ class RGBColorMediator extends Object implements SliderObserver, ObserverIF {
 	public double getRed() {
 		return red;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see model.ObserverIF#update()

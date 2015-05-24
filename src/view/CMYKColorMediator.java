@@ -1,17 +1,18 @@
-/*
-   This file is part of j2dcg.
-   j2dcg is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-   j2dcg is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-   You should have received a copy of the GNU General Public License
-   along with j2dcg; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
+/******************************************************
+Cours : GTI410
+Session : E2015
+Groupe : 01
+Projet : Laboratoire #1
+�tudiant(e)(s) : Andrew Leong
+Domgaing Moyo David Francis
+Code(s) perm. :  LEOS26099000
+DJOD14058001
+Charg� de cours : Francis Cardinal
+Charg�s de labo : Francis Cardinal
+Nom du fichier : CMYKColorMediator.java
+Date cr�� : 2015/05/11
+Date dern. modif. 2015/05/24
+ *******************************************************/
 
 package view;
 
@@ -37,6 +38,12 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 	int imagesHeight;
 	ColorDialogResult result;
 
+	/**
+	 * Constructeur
+	 * @param result
+	 * @param imagesWidth
+	 * @param imagesHeight
+	 */
 	CMYKColorMediator(ColorDialogResult result, int imagesWidth,
 			int imagesHeight) {
 		this.imagesWidth = imagesWidth;
@@ -121,7 +128,14 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 
 		result.setPixel(pixel);
 	}
-
+	
+	/**
+	 * Calcule les valeurs de l'image de la couleur Cyan
+	 * @param cyan
+	 * @param magenta
+	 * @param yellow
+	 * @param black
+	 */
 	public void computeCyanImage(int cyan, int magenta, int yellow, int black) {
 		int[] rgbColors = convertCMYKtoRGB(cyan, magenta, yellow, black);
 		Pixel p = new Pixel(rgbColors[0], rgbColors[1], rgbColors[2], 255);
@@ -138,7 +152,14 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 			cyanCS.update(cyanImage);
 		}
 	}
-
+	
+	/**
+	 * Calcule les valeurs de l'image de la couleur Magenta
+	 * @param cyan
+	 * @param magenta
+	 * @param yellow
+	 * @param black
+	 */
 	public void computeMagentaImage(int cyan, int magenta, int yellow, int black) {
 		int[] rgbColors = convertCMYKtoRGB(cyan, magenta, yellow, black);
 		Pixel p = new Pixel(rgbColors[0], rgbColors[1], rgbColors[2], 255);
@@ -156,6 +177,13 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 		}
 	}
 
+	/**
+	 * Calcule les valeurs de l'image de la couleur Yellow
+	 * @param cyan
+	 * @param magenta
+	 * @param yellow
+	 * @param black
+	 */
 	public void computeYellowImage(int cyan, int magenta, int yellow, int black) {
 		int[] rgbColors = convertCMYKtoRGB(cyan, magenta, yellow, black);
 		Pixel p = new Pixel(rgbColors[0], rgbColors[1], rgbColors[2], 255);
@@ -173,6 +201,13 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 		}
 	}
 
+	/**
+	 * Calcule les valeurs de l'image de la couleur Black
+	 * @param cyan
+	 * @param magenta
+	 * @param yellow
+	 * @param black
+	 */
 	public void computeBlackImage(int cyan, int magenta, int yellow, int black) {
 		int blackTemp;
 
@@ -289,6 +324,13 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 //Cette fonction est inspiré à partir du site web ci-dessous,
 //la partie RGB to CMYK conversion formula
 //http://www.rapidtables.com/convert/color/rgb-to-cmyk.htm	
+	/**
+	 * Converti les valeurs RGB en valeurs CMYK
+	 * @param red
+	 * @param green
+	 * @param blue
+	 * @return
+	 */
 	public int[] convertRGBtoCMYK(int red, int green, int blue) {
 		int[] cmykColors = new int[4];
 
@@ -308,6 +350,14 @@ class CMYKColorMediator extends Object implements SliderObserver, ObserverIF {
 //Cette fonction est inspiré à partir du site web ci-dessous,
 //la partie CMYK to RGB conversion formula
 //http://www.rapidtables.com/convert/color/cmyk-to-rgb.htm
+	/**
+	 * Converti les valeurs CMYK en valeurs RGB
+	 * @param cyan
+	 * @param magenta
+	 * @param yellow
+	 * @param black
+	 * @return
+	 */
 	public int[] convertCMYKtoRGB(int cyan, int magenta, int yellow, int black) {
 		int[] rgbColors = new int[3];
 
